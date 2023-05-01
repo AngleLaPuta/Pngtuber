@@ -13,7 +13,7 @@ import sounddevice as sd
 import numpy as np
 
 position = 0
-f = open('/dist/data.txt', 'r+')
+f = open('data.in', 'r+')
 configur = ConfigParser()
 configur.read('config.ini')
 print("Sections : ", configur.sections())
@@ -31,7 +31,8 @@ talks = configur.getboolean('features', 'talks')
 blinks = configur.getboolean('features', 'blinks')
 tab = configur.getboolean('features', 'tablet')
 rat = configur.getboolean('features', 'mouse')
-
+tab = False
+rat = False
 # Sets the initial values of the variables
 talking = blinking = False
 frames = []
@@ -167,7 +168,7 @@ while not done:
     screen.fill('green')  # Fills the screen with green
     if not blinking:  # Checks if the character is not blinking
         eye()  # Calls the eye function
-    screen.blit(pygame.transform.image(kat,rot), (50, 250 - 200 * wscale))  # Draws the image
+    screen.blit(kat, (50, 250 - 200 * wscale))  # Draws the image
     if tab:
         screen.blit(drawhand,(0+position.x*0.18,140+position.y*0.1875))
         screen.blit(tablet, (10, 150))  # Draws the image
